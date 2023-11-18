@@ -16,20 +16,20 @@ export default function Cadastro() {
   const cadastrarUsuario = async () => {
     const { nome, email, senha, confirmarSenha } = formData;
 
-    // Validar se os campos obrigatórios foram preenchidos
+    
     if (!nome || !email || !senha || !confirmarSenha) {
       Alert.alert('Preencha todos os campos!');
       return;
     }
 
-    // Validar se a senha e a confirmação de senha são iguais
+    
     if (senha !== confirmarSenha) {
       Alert.alert('As senhas não coincidem!');
       return;
     }
 
     try {
-      // Enviar a solicitação para a API de cadastro
+      
       const response = await axios.post('https://6513726b8e505cebc2e9db94.mockapi.io/clientes', {
         nome,
         email,

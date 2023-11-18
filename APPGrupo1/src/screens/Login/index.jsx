@@ -15,7 +15,7 @@ export default function Login() {
 
   const authenticateUser = async (email, senha) => {
     try {
-      setLoading(true); // Adiciona feedback de carregamento
+      setLoading(true); 
 
       const response = await axios.get(`https://6513726b8e505cebc2e9db94.mockapi.io/clientes?email=${email}`);
 
@@ -27,7 +27,7 @@ export default function Login() {
           if (user.senha === senha) {
             Alert.alert('Login bem-sucedido!');
             navigation.navigate('Home');
-            setFormData({ email: '', senha: '' }); // Limpar os campos após o login
+            setFormData({ email: '', senha: '' }); 
           } else {
             Alert.alert('Senha incorreta. Tente novamente.');
           }
@@ -41,7 +41,7 @@ export default function Login() {
       console.error('Erro ao fazer login:', error);
       Alert.alert('Erro ao fazer login. Tente novamente mais tarde.');
     } finally {
-      setLoading(false); // Remove o feedback de carregamento, independentemente do resultado
+      setLoading(false); 
     }
   };
 

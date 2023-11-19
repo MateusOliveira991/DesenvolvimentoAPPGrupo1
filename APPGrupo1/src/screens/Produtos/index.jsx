@@ -19,11 +19,11 @@ const Produtos = ({ navigation }) => {
       </View>
 
       <Text>
-        Descrição Cara
+        Jogo Cara
       </Text>
 
       <TouchableOpacity onPress={handleMostrarCara}>
-        <Text>Mostrar Cara</Text>
+        <Text>Descrição Cara</Text>
       </TouchableOpacity>
 
       <View>
@@ -31,7 +31,7 @@ const Produtos = ({ navigation }) => {
       </View>
 
       <Text>
-        Produto: Detetive
+        Jogo Detetive
       </Text>
 
       <TouchableOpacity onPress={handleMostrarDetetive}>

@@ -15,7 +15,7 @@ const Produtos = ({ navigation }) => {
   return (
     <View>
       <View>
-        <Image source={caraImg} style={{ width: '55%', height: '100%', marginTop: 90 }} />
+        <Image source={caraImg} style={{ width: "100%", height: 500, marginTop: 90 }} />
       </View>
 
       <Text>
@@ -27,7 +27,7 @@ const Produtos = ({ navigation }) => {
       </TouchableOpacity>
 
       <View>
-        <Image source={detetiveImg} style={{ width: '55%', height: '100%', marginTop: 90 }} />
+        <Image source={detetiveImg} style={{ width: '55%', height: 'auto', marginTop: 90 }} />
       </View>
 
       <Text>

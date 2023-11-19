@@ -4,6 +4,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import React from 'react';
 import Cadastro from '../screens/Cadastro';
+import CadastroProduto from '../screens/CadastroProduto';
 import Descricao from '../screens/Descricao';
 import Home from '../screens/Home';
 import Login from '../screens/Login';
@@ -19,7 +20,7 @@ function Tabs() {
       tabBarPosition='bottom'>
       <Tab.Screen name='Home' component={Home} />
       <Tab.Screen name='Produtos' component={Produtos} />
-      <Tab.Screen name='Cadastro' component={Cadastro} />
+      <Tab.Screen name='Cadastrar Produto' component={CadastroProduto} />
     </Tab.Navigator>
   )
 }
@@ -41,7 +42,7 @@ export const Rotas = () => {
           headerShown: true
         }}
       >
-        <Drawer.Screen name='Tabs' component={Tabs}
+        <Drawer.Screen name='Gerenciamento de produtos' component={Tabs}
           options={{
             drawerItemStyle: { height: 0 }
           }} />

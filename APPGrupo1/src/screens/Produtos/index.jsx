@@ -57,7 +57,7 @@ const Produtos = ({ navigation }) => {
               <Text style={styles.descricao}>{item.descricao}</Text>
               <Text style={styles.valor}>Valor: R${item.valor}</Text>
 
-              {/* Corrigido para passar o parâmetro id */}
+            
               <Button
                 title="Descrição"
                 onPress={() =>
@@ -75,5 +75,30 @@ const Produtos = ({ navigation }) => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  lista: {
+    paddingBottom: 20
+  },
+  titulo: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  imagem: {
+    width: 100,
+    height: 50
+  },
+  descricao: {
+    fontSize: 18
 
-// ... (estilos)
+  },
+  valor: {
+    fontSize: 18
+
+  }
+})
+
+export default Produtos;
+

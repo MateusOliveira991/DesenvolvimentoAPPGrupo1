@@ -28,9 +28,10 @@ function Tabs() {
 function Stacks() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Descricao"  component={Descricao} />  
       <Stack.Screen name='Login' component={Login} />
       <Stack.Screen name='Home' component={Home} />
-      <Stack.Screen name="Descricao"  component={Descricao} />  
+      
 
     </Stack.Navigator>
   )
@@ -40,6 +41,7 @@ export const Rotas = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
+        initialRouteName='Login'
         screenOptions={{
           headerShown: true
         }}
@@ -49,7 +51,7 @@ export const Rotas = () => {
             drawerItemStyle: { height: 0 }
           }} />
           
-          <Drawer.Screen name='Descrição' component={Stacks}
+          <Drawer.Screen name='Descricao' component={Stacks}
           options={{
             drawerItemStyle: { height: 0 }
           }} />

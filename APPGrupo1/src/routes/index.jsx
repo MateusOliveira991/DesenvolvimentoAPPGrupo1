@@ -30,6 +30,8 @@ function Stacks() {
     <Stack.Navigator>
       <Stack.Screen name='Login' component={Login} />
       <Stack.Screen name='Home' component={Home} />
+      <Stack.Screen name="Descricao"  component={Descricao} />  
+
     </Stack.Navigator>
   )
 }
@@ -47,7 +49,10 @@ export const Rotas = () => {
             drawerItemStyle: { height: 0 }
           }} />
           
-            
+          <Drawer.Screen name='Descrição' component={Stacks}
+          options={{
+            drawerItemStyle: { height: 0 }
+          }} />
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Cadastro" component={Cadastro} />

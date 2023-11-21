@@ -46,10 +46,13 @@ export const Rotas = () => {
           options={{
             drawerItemStyle: { height: 0 }
           }} />
+          
+            
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Cadastro" component={Cadastro} />
         <Drawer.Screen name="Produtos" component={Produtos} />
+        <Drawer.Screen name="Descricao" component={Descricao} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

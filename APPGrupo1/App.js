@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rotas } from './src/routes';
+import { Rotas } from './src/Routes';
 
 
 export default function App() {

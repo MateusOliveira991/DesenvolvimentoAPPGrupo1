@@ -28,7 +28,7 @@ function Tabs() {
 function Stacks() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Descricao"  component={Descricao} />  
+      <Stack.Screen name="Descrições"  component={Descricao} />  
       <Stack.Screen name='Login' component={Login} />
       <Stack.Screen name='Home' component={Home} />
       

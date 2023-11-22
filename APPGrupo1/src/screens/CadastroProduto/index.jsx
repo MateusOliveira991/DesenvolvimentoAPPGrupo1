@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, Text, View, Modal } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import styles from "./styles";
 
 const CadastroProduto = () => {
   const [formData, setFormData] = useState({
@@ -12,32 +13,54 @@ const CadastroProduto = () => {
     valor: ''
   })
 
+  // state para abrir o modal
+  const [isVisible, setIsVisible] = useState(false);
+  // state para saber a pessoa confirmou o cadastro
+  const [isConfirm, setIsConfirm] = useState(false);
+
   const navigation = useNavigation();
+
+  // só fecha o modal
+  const handleConfirm = () => {
+    // confirmar clicou que o usuário
+    setIsConfirm(true);
+    setIsVisible(false); 
+  };
+
+  // faz a mesma coisa
+  const handleCancel = () => {
+    setIsVisible(false);
+  };
 
   const cadastrarProduto = async () => {
     const { nomeProduto, descricao, nomeArquivo, valor } = formData;
 
-    try {
+    if (isConfirm)  {
+      try {
 
-      const response = await axios.post('https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos', {
-        nomeProduto,
-        descricao,
-        nomeArquivo,
-        valor
-      })
+        const response = await axios.post('https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos', {
+          nomeProduto,
+          descricao,
+          nomeArquivo,
+          valor
+        })
 
-      Alert.alert('Cadastro bem-sucedido!');
-      navigation.navigate('Produtos');
+        Alert.alert('Cadastro bem-sucedido!');
+        navigation.navigate('Produtos');
 
-    } catch (error) {
-      console.error('Erro ao cadastrar produto:', error);
-      Alert.alert('Erro ao cadastrar produto. Tente novamente mais tarde.');
+      } catch (error) {
+        console.error('Erro ao cadastrar produto:', error);
+        Alert.alert('Erro ao cadastrar produto. Tente novamente mais tarde.');
+      }
+    } else {
+      return;
     }
   }
 
   const handleClear = () => {
     setFormData({});
   };
+
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 25 }}>Cadastro de Produto</Text>
@@ -75,30 +98,29 @@ const CadastroProduto = () => {
           value={formData.nomeArquivo}
           onChangeText={(value) => setFormData({ ...formData, nomeArquivo: value })}
         />
-        <Button title="Cadastrar" onPress={() => { cadastrarProduto(); handleClear() }} />
+        <Button title="Cadastrar" onPress={() => { setIsVisible(true); cadastrarProduto(); handleClear() }} />
       </View>
+
+      // TRAZER O MODAL AQUI
+      <Modal
+        animationType="slide" // Alterei a animação para slide, mas você pode escolher a que preferir
+        transparent={true}
+        visible={isVisible}
+        onRequestClose={() => setIsVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Confirmar a Operação?</Text>
+
+            <View style={styles.buttonContainer}>
+              <Button title="Confirmar" onPress={handleConfirm} />
+              <Button title="Cancelar" onPress={handleCancel} />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  form: {
-    flex: 1,
-    width: "90%",
-    fontSize: 35,
-  },
-  texto: {
-    fontSize: 20
-  },
-  input: {
-    fontSize: 15,
-    paddingBottom: 10
-  }
-})
-
 
 export default CadastroProduto

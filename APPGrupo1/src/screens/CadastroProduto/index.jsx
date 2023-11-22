@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Alert, Button, Text, View, Modal } from 'react-native';
+import { Alert, Button, Text, View, Modal, ActivityIndicator } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import styles from "./styles";
 
@@ -14,9 +14,11 @@ const CadastroProduto = () => {
   })
 
   // state para abrir o modal
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   // state para saber a pessoa confirmou o cadastro
   const [isConfirm, setIsConfirm] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigation = useNavigation();
 
@@ -24,7 +26,7 @@ const CadastroProduto = () => {
   const handleConfirm = () => {
     // confirmar clicou que o usuário
     setIsConfirm(true);
-    setIsVisible(false); 
+    setIsVisible(false);
   };
 
   // faz a mesma coisa
@@ -35,9 +37,9 @@ const CadastroProduto = () => {
   const cadastrarProduto = async () => {
     const { nomeProduto, descricao, nomeArquivo, valor } = formData;
 
-    if (isConfirm)  {
+    if (isConfirm) {
       try {
-
+        setIsLoading(true)
         const response = await axios.post('https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos', {
           nomeProduto,
           descricao,
@@ -45,6 +47,11 @@ const CadastroProduto = () => {
           valor
         })
 
+        setIsLoading(false)
+        //MODAL NO LUGAR DO ALERT
+        //STATE PARA DOIS MODAIS
+        //MUDAR A DINÂMICA DO ISLOADING ""
+        //
         Alert.alert('Cadastro bem-sucedido!');
         navigation.navigate('Produtos');
 
@@ -110,12 +117,19 @@ const CadastroProduto = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Confirmar a Operação?</Text>
+            {isLoading && (
+              <ActivityIndicator />
+            )}
+            {!isLoading && (
+              <>
+                <Text style={styles.modalText}>Confirmar a Operação?</Text>
 
-            <View style={styles.buttonContainer}>
-              <Button title="Confirmar" onPress={handleConfirm} />
-              <Button title="Cancelar" onPress={handleCancel} />
-            </View>
+                <View style={styles.buttonContainer}>
+                  <Button title="Confirmar" onPress={handleConfirm} />
+                  <Button title="Cancelar" onPress={handleCancel} />
+                </View>
+              </>
+            )}
           </View>
         </View>
       </Modal>

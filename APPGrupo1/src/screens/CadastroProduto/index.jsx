@@ -84,11 +84,11 @@ const CadastroProduto = () => {
             {isLoading ? (
               <ActivityIndicator />
             ) : (
-             
-             <View style={styles.modal}>
+
+              <View style={styles.modal}>
                 <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
                 <View style={styles.buttonContainer}>
-                  
+
                   <TouchableOpacity
                     style={styles.botaoModal}
                     onPress={confirmar}>

@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 const style = StyleSheet.create({
- 
+
   modal: {
     backgroundColor: "#be2596",
-    margin: 80,
     padding: 20,
+    marginTop: 75,
     borderRadius: 20,
     elevation: 10,
+    width: "65%",
   },
 
   textoModal: {
@@ -20,11 +21,15 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 20,
+    alignItems: "center",
+    justifyContent: 'center',
+    gap: 15
+
   },
 
   botaoModal: {
     backgroundColor: "#96be25",
-    width: '65%', // Adjusted the width to 65%
+    width: '50%', // Adjusted the width to 65%
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
@@ -38,35 +43,16 @@ const style = StyleSheet.create({
     textAlign: 'center',
   },
 
+  modalContent:{
+    alignItems: "center",
+    justifyContent: 'center'
+  },
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//CADASTRO
   container: {
     flex: 1,
     alignItems: 'center',

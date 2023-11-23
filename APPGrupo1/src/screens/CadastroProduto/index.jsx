@@ -53,9 +53,6 @@ const CadastroProduto = () => {
     console.log("Operação cancelada!");
   };
 
-
-
-
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 25 }}>Cadastro de Produto</Text>
@@ -76,36 +73,35 @@ const CadastroProduto = () => {
         <Button title="Cadastrar" onPress={() => setIsVisible(true)} />
       </View>
 
-
       <Modal
         animationType="slide"
         transparent={true}
         visible={isVisible}
         onRequestClose={() => setIsVisible(false)}
       >
-
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             {isLoading ? (
               <ActivityIndicator />
             ) : (
-              <>
-
-
-                <View style={styles.modal}>
-                  <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
-
+             
+             <View style={styles.modal}>
+                <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
+                <View style={styles.buttonContainer}>
+                  
                   <TouchableOpacity
                     style={styles.botaoModal}
                     onPress={confirmar}>
-                    <Text>Confirmar</Text>
+                    <Text style={styles.botaoModalTexto}>Confirmar</Text>
                   </TouchableOpacity>
 
-                  <Button title="Cancelar" onPress={cancelar} />
+                  <TouchableOpacity
+                    style={styles.botaoModal}
+                    onPress={cancelar}>
+                    <Text style={styles.botaoModalTexto}>Cancelar</Text>
+                  </TouchableOpacity>
                 </View>
-
-
-              </>
+              </View>
             )}
           </View>
         </View>

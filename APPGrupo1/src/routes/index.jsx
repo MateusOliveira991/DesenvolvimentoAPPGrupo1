@@ -9,6 +9,8 @@ import Descricao from '../screens/Descricao';
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Produtos from '../screens/Produtos';
+import Integrantes from '../screens/Integrantes';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -54,6 +56,7 @@ export const Rotas = () => {
         <Drawer.Screen name="Cadastro" component={Cadastro} />
         <Drawer.Screen name="Produtos" component={Produtos} />
         <Drawer.Screen name="Teste" component={CadastroProduto} />
+        <Drawer.Screen name="Integrantes" component={Integrantes} />
         
       </Drawer.Navigator>
     </NavigationContainer>

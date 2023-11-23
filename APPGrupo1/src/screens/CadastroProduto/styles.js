@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 const style = StyleSheet.create({
 
   modal: {
-    backgroundColor: "#be2596",
+    flex: 1,
+    backgroundColor: "#49be25",
     padding: 20,
-    marginTop: 75,
+    marginTop: 150,
     borderRadius: 20,
-    elevation: 10,
-    width: "65%",
+    borderRadius: 95,
   },
 
   textoModal: {
@@ -18,6 +18,7 @@ const style = StyleSheet.create({
   },
 
   buttonContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 20,
@@ -28,10 +29,10 @@ const style = StyleSheet.create({
   },
 
   botaoModal: {
-    backgroundColor: "#96be25",
+    backgroundColor: "#92cbdf",
     width: '50%', // Adjusted the width to 65%
     padding: 12,
-    borderRadius: 10,
+    borderRadius: 200,
     alignItems: 'center',
     justifyContent: 'space-between',
   },

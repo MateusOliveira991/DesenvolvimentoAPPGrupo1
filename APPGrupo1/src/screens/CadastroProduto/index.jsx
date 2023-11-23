@@ -19,9 +19,14 @@ const CadastroProduto = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
-  const confirmar = async () => {
-    try {
+
+  
+  const confirmar = () => {
+    setTimeout(async() => {
+      console.log("enrolando");
+      try {
       setIsLoading(true);
+      
       handleConfirm();
       setIsVisible(false);
 
@@ -36,6 +41,8 @@ const CadastroProduto = () => {
       setIsLoading(false);
       setFormData(initialFormData);
     }
+    },1000)
+    
   };
 
   const cancelar = () => {

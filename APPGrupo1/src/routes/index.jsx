@@ -41,21 +41,15 @@ export const Rotas = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName='Login'
         screenOptions={{
           headerShown: true
         }}
       >
-        <Drawer.Screen name='Gerenciamento de produtos' component={Tabs}
+        <Drawer.Screen name='Início' component={Tabs}/>
+        <Drawer.Screen name='Descricao' component={Stacks}
           options={{
             drawerItemStyle: { height: 0 }
           }} />
-          
-          <Drawer.Screen name='Descricao' component={Stacks}
-          options={{
-            drawerItemStyle: { height: 0 }
-          }} />
-        <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Cadastro" component={Cadastro} />
         <Drawer.Screen name="Produtos" component={Produtos} />

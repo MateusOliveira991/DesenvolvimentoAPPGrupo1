@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
-import React, { useState } from 'react';
-import { Alert, Button, Text, View, Modal, ActivityIndicator } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { ActivityIndicator, Alert, Button, Modal, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import { ProdutosContext } from '../../context/ProdutosContext';
 import styles from "./styles";
+import axios from 'axios';
 
 const CadastroProduto = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +14,13 @@ const CadastroProduto = () => {
     valor: ''
   })
 
+  const { cadastrar } = useContext(ProdutosContext)
+
+  // const { handleConfirm } = useContext(ModalContext)
+  // const { handleCancel } = useContext(ModalContext)
+
   // state para abrir o modal
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   // state para saber a pessoa confirmou o cadastro
   const [isConfirm, setIsConfirm] = useState(false);
 
@@ -23,49 +29,48 @@ const CadastroProduto = () => {
   const navigation = useNavigation();
 
   // só fecha o modal
-  const handleConfirm = () => {
+  const confirmar = () => {
     // confirmar clicou que o usuário
+    handleConfirm()
     setIsConfirm(true);
     setIsVisible(false);
+    cadastrar(formData);
+    console.log(formData);
+    setFormData({});
   };
 
-  // faz a mesma coisa
-  const handleCancel = () => {
+  const cancelar = () => {
+    handleCancel();
     setIsVisible(false);
   };
 
-  const cadastrarProduto = async () => {
-    const { nomeProduto, descricao, nomeArquivo, valor } = formData;
+  const handleConfirm = async () => {
+    const { nomeProduto, descricao, nomeArquivo, valor } = formData
+    // Lógica para confirmar a operação
+    console.log("Operação confirmada!");
+    setIsVisible(false);
+    try {
+      const response = await axios.post('https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos', {
+        nomeProduto,
+        descricao,
+        nomeArquivo,
+        valor
+      })
 
-    if (isConfirm) {
-      try {
-        setIsLoading(true)
-        const response = await axios.post('https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos', {
-          nomeProduto,
-          descricao,
-          nomeArquivo,
-          valor
-        })
+      console.log(response)
+      Alert.alert('Cadastro bem-sucedido!');
+      navigation.navigate('Produtos');
 
-        setIsLoading(false)
-        //MODAL NO LUGAR DO ALERT
-        //STATE PARA DOIS MODAIS
-        //MUDAR A DINÂMICA DO ISLOADING ""
-        //
-        Alert.alert('Cadastro bem-sucedido!');
-        navigation.navigate('Produtos');
-
-      } catch (error) {
-        console.error('Erro ao cadastrar produto:', error);
-        Alert.alert('Erro ao cadastrar produto. Tente novamente mais tarde.');
-      }
-    } else {
-      return;
+    } catch (error) {
+      console.error('Erro ao cadastrar produto:', error);
+      Alert.alert('Erro ao cadastrar produto. Tente novamente mais tarde.');
     }
-  }
+  };
 
-  const handleClear = () => {
-    setFormData({});
+  const handleCancel = () => {
+    // Lógica para cancelar a operação
+    console.log("Operação cancelada!");
+    setIsVisible(false);
   };
 
   return (
@@ -105,10 +110,9 @@ const CadastroProduto = () => {
           value={formData.nomeArquivo}
           onChangeText={(value) => setFormData({ ...formData, nomeArquivo: value })}
         />
-        <Button title="Cadastrar" onPress={() => { setIsVisible(true); cadastrarProduto(); handleClear() }} />
+        <Button title="Cadastrar" onPress={() => setIsVisible(true)} />
       </View>
 
-      // TRAZER O MODAL AQUI
       <Modal
         animationType="slide" // Alterei a animação para slide, mas você pode escolher a que preferir
         transparent={true}
@@ -125,8 +129,8 @@ const CadastroProduto = () => {
                 <Text style={styles.modalText}>Confirmar a Operação?</Text>
 
                 <View style={styles.buttonContainer}>
-                  <Button title="Confirmar" onPress={handleConfirm} />
-                  <Button title="Cancelar" onPress={handleCancel} />
+                  <Button title="Confirmar" onPress={confirmar} />
+                  <Button title="Cancelar" onPress={cancelar} />
                 </View>
               </>
             )}

@@ -1,8 +1,10 @@
-import { Link, useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { EvilIcons } from "@expo/vector-icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Alert,
+  Button,
   Image,
   StyleSheet,
   Text,
@@ -10,13 +12,15 @@ import {
   View,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { Feather, EvilIcons } from "@expo/vector-icons";
-import { Button } from "react-native";
-
-
 
 const Produtos = ({ navigation }) => {
   const [produtos, setProdutos] = useState();
+
+  const obterInfos = async () => {
+    const produtos = await AsyncStorage.getItem("produtos")
+    const dados = JSON.parse(produtos)
+    console.log(produtos)
+  }
 
   useEffect(() => {
     axios

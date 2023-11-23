@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
-import { ActivityIndicator, Alert, Button, Modal, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Alert, Button, Modal, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { ProdutosContext } from '../../context/ProdutosContext';
 import styles from "./styles";
 import axios from 'axios';
@@ -41,9 +41,9 @@ const CadastroProduto = () => {
   const cancelar = () => {
     handleCancel();
     setIsVisible(false);
-    setFormData(initialFormData); 
+    setFormData(initialFormData);
   };
-  
+
   const handleConfirm = () => {
     console.log("Operação confirmada!");
     // Additional logic for confirmation if needed
@@ -52,6 +52,9 @@ const CadastroProduto = () => {
   const handleCancel = () => {
     console.log("Operação cancelada!");
   };
+
+
+
 
   return (
     <View style={styles.container}>
@@ -73,23 +76,35 @@ const CadastroProduto = () => {
         <Button title="Cadastrar" onPress={() => setIsVisible(true)} />
       </View>
 
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={isVisible}
         onRequestClose={() => setIsVisible(false)}
       >
+
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             {isLoading ? (
               <ActivityIndicator />
             ) : (
               <>
-                <Text style={styles.modalText}>Confirmar a Operação?</Text>
-                <View style={styles.buttonContainer}>
-                  <Button title="Confirmar" onPress={confirmar} />
+
+
+                <View style={styles.modal}>
+                  <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
+
+                  <TouchableOpacity
+                    style={styles.botaoModal}
+                    onPress={confirmar}>
+                    <Text>Confirmar</Text>
+                  </TouchableOpacity>
+
                   <Button title="Cancelar" onPress={cancelar} />
                 </View>
+
+
               </>
             )}
           </View>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, Alert, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
+const backgroundImage = require('../../assets/tabuleiros-login.jpg');
 export default function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -50,8 +51,14 @@ export default function Login() {
   };
 
   return (
+    <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
     <View style={styles.container}>
-      <Text style={styles.title}>Bem-vindo ao App do grupo I</Text>
+      <Text style={styles.title}>Bem-vindo ao</Text>
+      <Text style={{fontFamily: 'Arial',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',}}>Reino Lúdico</Text>
 
       <TextInput
         style={styles.input}
@@ -78,20 +85,25 @@ export default function Login() {
         <Text style={styles.signupText}>Não tem uma conta? Cadastre-se aqui</Text>
       </TouchableOpacity>
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+
   },
   title: {
+    fontFamily: 'Arial',
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
+    textAlign: 'center',
+    
   },
   input: {
     height: 40,
@@ -101,6 +113,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingLeft: 10,
     width: '85%', 
+    backgroundColor: 'white',
+    opacity: '60%',
+    fontWeight: 'bold',
   },
   signupText: {
     marginTop: 10,

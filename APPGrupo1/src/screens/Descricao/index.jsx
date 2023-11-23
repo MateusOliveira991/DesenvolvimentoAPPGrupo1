@@ -88,29 +88,31 @@ const Descricao = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16,
   },
-  lista: {
-    // paddingBottom: 20,
+  headerText: {
+    fontSize: 25,
+    color: 'white',
+    paddingBottom: 10,
   },
-  titulo: {
+ 
+
+  nomeProduto:{
     fontSize: 20,
     fontWeight: 'bold',
+
   },
-  // imagem: {
-  //   width: '80%', 
-  //   height: '55%',
-  // },
+
+    valor:{
+    fontSize: 15,
+    color:'black',
+    fontWeight: 'bold',
+  },
+
   descricao: {
-    fontSize: 18,
+    color: '#444',
   },
-  valor: {
-    fontSize: 18,
-  },
-  button: {
-    fontSize: 18,
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
+
 });
 
 export default Descricao;

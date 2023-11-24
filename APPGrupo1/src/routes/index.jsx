@@ -2,8 +2,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import React from 'react';
 import Cadastro from '../screens/Cadastro';
 import CadastroProduto from '../screens/CadastroProduto';
 import Descricao from '../screens/Descricao';
@@ -29,18 +28,10 @@ function Tabs() {
 }
 
 function Stacks() {
-  const { isAuthenticated } = useContext(AuthContext);
   return (
     <Stack.Navigator>
-      {isAuthenticated ? (
-        <>
-          
-          <Stack.Screen name="Descrições" component={Descricao} />
-          <Stack.Screen name='Home' component={Home} />
-        </>
-      ) : (
-        <Stack.Screen name='Login' component={Login} />
-      )}
+      <Stack.Screen name="Descrições" component={Descricao} />
+      <Stack.Screen name='Login' component={Login} />
     </Stack.Navigator>
   );
 }
@@ -53,17 +44,19 @@ export const Rotas = () => {
           headerShown: true
         }}
       >
-        <Drawer.Screen name='Início' component={Tabs}/>
+        <Drawer.Screen name="Login" component={Login} headerShown={true}
+          options={{
+            drawerItemStyle: { height: 0 },
+            headerShown: false
+          }} />
+        <Drawer.Screen name='Início' component={Tabs} />
         <Drawer.Screen name='Descricao' component={Stacks}
           options={{
             drawerItemStyle: { height: 0 }
           }} />
-        <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Cadastro" component={Cadastro} />
-        <Drawer.Screen name="Produtos" component={Produtos} />
-        <Drawer.Screen name="Teste" component={CadastroProduto} />
+        <Drawer.Screen name="ProdutosD" component={Produtos} />
         <Drawer.Screen name="Integrantes" component={Integrantes} />
-        
       </Drawer.Navigator>
     </NavigationContainer>
   );

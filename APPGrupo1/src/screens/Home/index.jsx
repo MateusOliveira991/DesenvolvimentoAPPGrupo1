@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -8,6 +8,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../../context/AuthContext';
 
 const NavigationBar = () => {
   const navigation = useNavigation();
@@ -18,9 +19,7 @@ const NavigationBar = () => {
 
   return (
     <View style={styles.navigationBar}>
-      
-      
-     
+
       <TouchableOpacity onPress={() => navigateToRoute('Integrantes')}>
         <Text style={styles.navButton}>Integrantes</Text>
       </TouchableOpacity>
@@ -42,7 +41,7 @@ const Home = () => {
     scaleValue.value = withRepeat(
       withSpring(1.2, { damping: 2, stiffness: 5 }),
       -1,
-      true 
+      true
     );
   };
 
@@ -127,13 +126,13 @@ const styles = StyleSheet.create({
   navButton: {
     backgroundColor: 'gold',
     paddingVertical: 10,
-    paddingHorizontal: 8, 
-    marginHorizontal: 5, 
+    paddingHorizontal: 8,
+    marginHorizontal: 5,
     borderRadius: 5,
     fontWeight: 'bold',
     overflow: 'hidden',
   },
-  
+
 });
 
 export default Home;

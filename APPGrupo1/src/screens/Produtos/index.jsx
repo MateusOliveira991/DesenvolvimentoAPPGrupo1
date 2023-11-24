@@ -1,20 +1,17 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { EvilIcons } from "@expo/vector-icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styles from "./styles";
 import {
   Alert,
   Button,
+  FlatList,
   Image,
-  StyleSheet,
+  Modal,
   Text,
   TouchableOpacity,
-  View,
-  Modal,
-  ActivityIndicator,
-  FlatList
+  View
 } from "react-native";
+import styles from "./styles";
 
 const Produtos = ({ navigation }) => {
   const [produtos, setProdutos] = useState([]);
@@ -32,7 +29,7 @@ const Produtos = ({ navigation }) => {
         Alert.alert("Não foram encontrados produtos");
         navigation.navigate("Home");
       });
-  }, []);
+  }, [1000]);
 
   function excluirProduto(id) {
     try {
@@ -49,7 +46,6 @@ const Produtos = ({ navigation }) => {
       Alert.alert('Erro ao Deletar produto. Tente novamente mais tarde.');
     } finally {
       setItemToDelete(null);
-      setFormData(initialFormData);
     }
   }
 

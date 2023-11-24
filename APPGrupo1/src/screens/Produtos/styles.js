@@ -10,7 +10,7 @@ const style = StyleSheet.create({
     padding: 20,
     height: 150,
     borderRadius: 20,
-    transform: [{ translateY: '-50%' }],
+    transform: [{ translateY: 0.5 }],
 
     // sombras
     shadowColor: "#000",

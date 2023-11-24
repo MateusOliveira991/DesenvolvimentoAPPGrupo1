@@ -27,7 +27,7 @@ const CadastroProduto = () => {
       setIsLoading(false);
       setIsVisible(false);
       Alert.alert('Cadastro bem-sucedido!');
-      navigation.navigate('Produtos');
+      navigation.navigate('ProdutosD');
     } catch (error) {
       console.error('Erro ao cadastrar produto:', error);
       Alert.alert('Erro ao cadastrar produto. Tente novamente mais tarde.');

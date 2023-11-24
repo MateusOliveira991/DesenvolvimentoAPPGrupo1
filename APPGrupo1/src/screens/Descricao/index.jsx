@@ -1,6 +1,6 @@
 
 
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import jumanji from '../../assets/jumanji.webp';
 import ouija from '../../assets/ouija.jpg';
@@ -60,6 +60,20 @@ const Descricao = ({ navigation }) => {
       imagem: cara,
     },
   ]);
+  const [editingProductId, setEditingProductId] = useState(null);
+
+  const handleEditPress = (productId) => {
+    setEditingProductId(productId);
+  };
+
+  const handleSaveEdit = (productId, editedDescription) => {
+    setProdutos((prevProdutos) =>
+      prevProdutos.map((produto) =>
+        produto.id === productId ? { ...produto, descricao: editedDescription } : produto
+      )
+    );
+    setEditingProductId(null);
+  };
 
   return (
     <View style={styles.container}>
@@ -72,18 +86,39 @@ const Descricao = ({ navigation }) => {
             <Text style={styles.titulo}>{item.id}</Text>
             <Text style={styles.titulo}>{item.nomeProduto}</Text>
 
-            <Image source={item.imagem} style={{
-              width: '100%',
-              height: 300,
-              resizeMode: 'cover',
-              borderRadius: 8,
-              marginVertical: 10,
-            }} />
+            <Image
+              source={item.imagem}
+              style={{
+                width: '100%',
+                height: 300,
+                resizeMode: 'cover',
+                borderRadius: 8,
+                marginVertical: 10,
+              }}
+            />
 
-            <Text style={styles.descricao}>{item.descricao}</Text>
-
-
-
+            {editingProductId === item.id ? (
+              // Se estiver no modo de edição, exibe um TextInput para a edição
+              <View>
+                <TextInput
+                  style={styles.descricao}
+                  value={item.descricao}
+                  onChangeText={(text) => setProdutos((prevProdutos) => prevProdutos.map((produto) =>
+                    produto.id === item.id ? { ...produto, descricao: text } : produto))}
+                />
+                <TouchableOpacity onPress={() => handleSaveEdit(item.id, item.descricao)}>
+                  <Text>Salvar</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              // Se não estiver no modo de edição, exibe a descrição normalmente
+              <View>
+                <Text style={styles.descricao}>{item.descricao}</Text>
+                <TouchableOpacity onPress={() => handleEditPress(item.id)}>
+                  <Text>Editar Descrição</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
         )}
       />
@@ -96,25 +131,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'gray',
   },
-  headerText: {
-    fontSize: 25,
-    color: 'white',
-    paddingBottom: 10,
-  },
   lista: {
     backgroundColor: 'gold',
     borderRadius: 10,
     margin: 10,
     padding: 10,
   },
-  nomeProduto: {
+  titulo: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-
   descricao: {
     color: '#444',
     fontSize: 16,
+    marginVertical: 10,
   },
 });
 

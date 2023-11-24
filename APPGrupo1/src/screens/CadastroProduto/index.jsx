@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
-import { ActivityIndicator, Alert, Button, Modal, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, Alert, Modal, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { ProdutosContext } from '../../context/ProdutosContext';
-import styles from "./styles";
+import styles from './styles';
 import axios from 'axios';
 
 const CadastroProduto = () => {
@@ -10,7 +10,7 @@ const CadastroProduto = () => {
     nomeProduto: '',
     descricao: '',
     nomeArquivo: '',
-    valor: ''
+    valor: '',
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -18,8 +18,6 @@ const CadastroProduto = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
-
-
 
   const confirmar = async () => {
     try {
@@ -45,20 +43,20 @@ const CadastroProduto = () => {
   };
 
   const handleConfirm = () => {
-    console.log("Operação confirmada!");
-    // Additional logic for confirmation if needed
+    console.log('Operação confirmada!');
+    
   };
 
   const handleCancel = () => {
-    console.log("Operação cancelada!");
+    console.log('Operação cancelada!');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 25 }}>Cadastro de Produto</Text>
+      <Text style={styles.title}>Cadastro de Produto</Text>
       <View style={styles.form}>
         {['nomeProduto', 'descricao', 'valor', 'nomeArquivo'].map((field) => (
-          <View key={field}>
+          <View key={field} style={styles.inputContainer}>
             <Text style={styles.texto}>{field.charAt(0).toUpperCase() + field.slice(1)}:</Text>
             <TextInput
               style={styles.input}
@@ -70,10 +68,12 @@ const CadastroProduto = () => {
             />
           </View>
         ))}
-        <Button title="Cadastrar" onPress={() => setIsVisible(true)} />
+        <TouchableOpacity style={styles.button} onPress={() => setIsVisible(true)}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
+        </TouchableOpacity>
       </View>
 
-      <Modal style={styles.teste}
+      <Modal
         animationType="slide"
         transparent={true}
         visible={isVisible}
@@ -90,20 +90,19 @@ const CadastroProduto = () => {
                   </View>
                 </View>
               ) : (
-
                 <View style={styles.modal}>
                   <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
                   <View style={styles.buttonContainer}>
-
                     <TouchableOpacity
                       style={styles.botaoModalConfirmar}
-                      onPress={confirmar}>
+                      onPress={confirmar}
+                    >
                       <Text style={styles.botaoModalTextoConfirmar}>Confirmar</Text>
                     </TouchableOpacity>
-
                     <TouchableOpacity
                       style={styles.botaoModalCancelar}
-                      onPress={cancelar}>
+                      onPress={cancelar}
+                    >
                       <Text style={styles.botaoModalTextoCancelar}>Cancelar</Text>
                     </TouchableOpacity>
                   </View>
@@ -112,8 +111,8 @@ const CadastroProduto = () => {
             </View>
           </View>
         </View>
-      </Modal >
-    </View >
+      </Modal>
+    </View>
   );
 };
 

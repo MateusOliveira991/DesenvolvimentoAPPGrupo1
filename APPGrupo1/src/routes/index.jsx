@@ -1,15 +1,16 @@
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { createDrawerNavigator } from '@react-navigation/drawer'
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import Cadastro from '../screens/Cadastro';
 import CadastroProduto from '../screens/CadastroProduto';
 import Descricao from '../screens/Descricao';
 import Home from '../screens/Home';
+import Integrantes from '../screens/Integrantes';
 import Login from '../screens/Login';
 import Produtos from '../screens/Produtos';
-import Integrantes from '../screens/Integrantes';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,15 +29,20 @@ function Tabs() {
 }
 
 function Stacks() {
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Descrições"  component={Descricao} />  
-      <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='Home' component={Home} />
-      
-
+      {isAuthenticated ? (
+        <>
+          
+          <Stack.Screen name="Descrições" component={Descricao} />
+          <Stack.Screen name='Home' component={Home} />
+        </>
+      ) : (
+        <Stack.Screen name='Login' component={Login} />
+      )}
     </Stack.Navigator>
-  )
+  );
 }
 
 export const Rotas = () => {

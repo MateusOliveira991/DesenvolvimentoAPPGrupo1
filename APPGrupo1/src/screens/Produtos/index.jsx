@@ -81,26 +81,28 @@ const Produtos = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'gray',
   },
   lista: {
-    paddingBottom: 20
+    paddingBottom: 20,
+    backgroundColor: 'gold',
+    borderRadius: 10,
+    margin: 10,
+    padding: 10,
   },
   titulo: {
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
-  imagem: {
-    width: 100,
-    height: 50
-  },
+ 
   descricao: {
-    fontSize: 18
-
+    fontSize: 18,
+    color: 'black', 
   },
   valor: {
-    fontSize: 18
-
+    fontSize: 18,
+    color: 'black', 
   }
 })
 

@@ -91,6 +91,8 @@ const CadastroProduto = () => {
                 </View>
               ) : (
 
+
+
                 <View style={styles.modal}>
                   <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
                   <View style={styles.buttonContainer}>
@@ -114,7 +116,6 @@ const CadastroProduto = () => {
         </View>
       </Modal >
     </View >
-  );
-};
+  )}
 
 export default CadastroProduto;

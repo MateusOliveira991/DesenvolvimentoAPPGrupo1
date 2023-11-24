@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import { Alert, Button, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { AuthContext } from '../../context/AuthContext';
 
 const backgroundImage = require('../../assets/tabuleiros-login.jpg');
 export default function Login() {
@@ -13,31 +14,24 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
+  const { login } = useContext(AuthContext);
 
   const authenticateUser = async (email, senha) => {
     try {
       setLoading(true);
 
       const response = await axios.get(`https://6513726b8e505cebc2e9db94.mockapi.io/clientes?email=${email}`);
+      
 
       if (response.status === 200) {
-        const userData = response.data;
-
-        if (userData.length > 0) {
-          const user = userData[0];
-          if (user.senha === senha) {
-            Alert.alert('Login bem-sucedido!');
-            navigation.navigate('Home');
-            setFormData({ email: '', senha: '' });
+        login(email, senha);
+        navigation.navigate('Home');
+        setFormData({ email: '', senha: '' });
           } else {
-            Alert.alert('Senha incorreta. Tente novamente.');
+            Alert.alert('Dados incorretos. Tente novamente.');
           }
-        } else {
-          Alert.alert('Email não encontrado. Verifique as credenciais.');
-        }
-      } else {
-        Alert.alert('Erro ao buscar usuário. Tente novamente mais tarde.');
-      }
+          
+             
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       Alert.alert('Erro ao fazer login. Tente novamente mais tarde.');

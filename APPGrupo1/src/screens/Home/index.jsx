@@ -1,32 +1,33 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withSpring,
+  Easing,
+} from 'react-native-reanimated';
 
 const Home = () => {
-  const scaleValue = new Animated.Value(1);
+  const scaleValue = useSharedValue(1);
 
   useEffect(() => {
     startAnimation();
   }, []);
 
   const startAnimation = () => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(scaleValue, {
-          toValue: 1.2,
-          duration: 1000,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        Animated.timing(scaleValue, {
-          toValue: 1,
-          duration: 1000,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-      ]),
-      { iterations: -1 }
-    ).start();
+    scaleValue.value = withRepeat(
+      withSpring(1.2, { damping: 2, stiffness: 5 }),
+      -1,
+      true 
+    );
   };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scaleValue.value }],
+    };
+  });
 
   return (
     <View style={styles.container}>
@@ -50,9 +51,7 @@ const Home = () => {
         source={require('../../assets/logo.png')}
         style={[
           styles.image,
-          {
-            transform: [{ scale: scaleValue }],
-          },
+          animatedStyle,
         ]}
         resizeMode="contain"
       />
@@ -80,15 +79,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   blackSquare: {
-    backgroundColor: '#555',
+    backgroundColor: 'gray',
   },
   whiteSquare: {
-    backgroundColor: '#b8860b',
+    backgroundColor: 'gold',
   },
   image: {
     width: 300,
     height: 300,
-    borderRadius: '100%',
+    borderRadius: 150,
     marginBottom: 70,
     position: 'absolute',
   },

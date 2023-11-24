@@ -1,18 +1,22 @@
 # Grupo 1/Turma 13 - Serratec
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=%20Concluído&color=GREEN&style=for-the-badge)
 
 ## Descrição do Projeto
-<p>
+<p>Reino Lúdico Gerenciamento é um aplicativo de gerenciamento de um Ecommerce de jogos de tabuleiro. </p>
 
-Reino Lúdico
-Projeto Grupo 1 de React Native
 
-App feito no Expo.
-
-</p>
+## Funcionalidades do projeto
+<p> O aplicativo de gerenciamento somente permite o acesso a usuários cadastrados e logados;</p>
+<p>Após logado, o aplicativo mostra a tela de Home onde exibe a logo com animação de pulsação contínua; </p>
+<p>A partir da Home é possível ir para cadastro de produtos, cadastro de usuários e integrantes; </p>
+<p>A partir da página de produtos é possível excluir produto e verificar a descrição do produto onde é possível consultar a imagem e editar a descrição; </p>
+<p> O aplicativo foi desenvolvido para abrir na tela de login, impossibilitando a movimentação de novos usuários com um login anterior; </p>
 
 
 ## Ferramentas e tecnologias
+
+
+<img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="40" height="40"/><img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" height="40"/><img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40"/><img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40" height="40"/><img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="40" height="40"/>
 - ``Node``
 - ``VS Code``
 - ``React-Native``

@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { EvilIcons } from "@expo/vector-icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import styles from "./styles";
 import {
   Alert,
   Button,
@@ -10,17 +11,16 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  ActivityIndicator,
+  FlatList
 } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
 
 const Produtos = ({ navigation }) => {
-  const [produtos, setProdutos] = useState();
-
-  const obterInfos = async () => {
-    const produtos = await AsyncStorage.getItem("produtos")
-    const dados = JSON.parse(produtos)
-    console.log(produtos)
-  }
+  const [produtos, setProdutos] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   useEffect(() => {
     axios
@@ -35,76 +35,103 @@ const Produtos = ({ navigation }) => {
   }, []);
 
   function excluirProduto(id) {
-    axios.delete(
-      `https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos/${id}`
-    );
-    setProdutos(produtos.filter((produto) => produto.id !== id));
+    try {
+      setIsLoading(true);
+      handleConfirm();
+      axios.delete(`https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos/${id}`);
+      setProdutos(produtos.filter((produto) => produto.id !== id));
+      setIsLoading(false);
+      setIsVisible(false);
+      Alert.alert('Deletei!');
+      navigation.navigate('Produtos');
+    } catch (error) {
+      console.error('Erro ao Deletar:', error);
+      Alert.alert('Erro ao Deletar produto. Tente novamente mais tarde.');
+    } finally {
+      setItemToDelete(null);
+      setFormData(initialFormData);
+    }
   }
+
+  const handleConfirm = () => {
+    console.log("Operação confirmada!");
+    // Additional logic for confirmation if needed
+  };
+
+  const handleCancel = () => {
+    setIsVisible(false);
+    setItemToDelete(null);
+    // Logic for cancellation
+  };
+
+  const showDeleteModal = (id) => {
+    setItemToDelete(id);
+    setIsVisible(true);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 25, paddingVertical: 10 }}>Produtos:</Text>
-      <View>
-        <FlatList
-          data={produtos}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.lista}>
-              <Text style={styles.titulo}>{item.id}</Text>
-              <Text style={styles.titulo}>{item.nomeProduto}</Text>
+      <FlatList
+        data={produtos}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.lista}>
+            <Text style={styles.titulo}>{item.id}</Text>
+            <Text style={styles.titulo}>{item.nomeProduto}</Text>
 
-              <Image
-                source={{ uri: `../../assets/${item.nomeArquivo}` }}
-                style={styles.imagem}
-              />
+            <Image
+              source={{ uri: `../../assets/${item.nomeArquivo}` }}
+              style={styles.imagem}
+            />
 
-              <Text style={styles.descricao}>{item.descricao}</Text>
-              <Text style={styles.valor}>Valor: R${item.valor}</Text>
+            <Text style={styles.descricao}>{item.descricao}</Text>
+            <Text style={styles.valor}>Valor: R${item.valor}</Text>
 
-            
-              <Button
-                title="Descrição"
-                onPress={() =>
-                  navigation.navigate("Descricao", { id: item.id })
-                }
-              />
+            <Button
+              title="Descrição"
+              onPress={() =>
+                navigation.navigate("Descricao", { id: item.id })
+              }
+            />
 
-              <TouchableOpacity onPress={() => excluirProduto(item.id)}>
-                <EvilIcons name="trash" size={18} color={"black"} />
-              </TouchableOpacity>
+            <TouchableOpacity onPress={() => showDeleteModal(item.id)}>
+              <EvilIcons name="trash" size={18} color={"black"} />
+            </TouchableOpacity>
+          </View>
+        )}
+      />
+
+      {/* Modal for delete confirmation */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isVisible}
+        onRequestClose={() => setIsVisible(false)}
+      >
+        <View style={styles.overlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={styles.botaoModalConfirmar}
+                  onPress={() => excluirProduto(itemToDelete)}>
+                  <Text style={styles.botaoModalTextoConfirmar}>Confirmar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.botaoModalCancelar}
+                  onPress={handleCancel}>
+                  <Text style={styles.botaoModalTextoCancelar}>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          )}
-        />
-      </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'gray',
-  },
-  lista: {
-    paddingBottom: 20,
-    backgroundColor: 'gold',
-    borderRadius: 10,
-    margin: 10,
-    padding: 10,
-  },
-  titulo: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
- 
-  descricao: {
-    fontSize: 18,
-    color: 'black', 
-  },
-  valor: {
-    fontSize: 18,
-    color: 'black', 
-  }
-})
 
 export default Produtos;
-

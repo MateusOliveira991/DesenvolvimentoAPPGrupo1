@@ -3,6 +3,7 @@
 
 ## Descrição do Projeto
 <p>
+================== Reino Lúdico ===========================
 ================== Projeto Grupo 1 de React Native ===========================
 
 App feito no Expo.

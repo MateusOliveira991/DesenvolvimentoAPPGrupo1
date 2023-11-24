@@ -99,8 +99,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontFamily: 'Arial',
-    fontSize: 24,
+     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: '85%', 
     backgroundColor: 'white',
-    opacity: '60%',
+    opacity: 0.6,
     fontWeight: 'bold',
   },
   signupText: {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -7,6 +7,29 @@ import Animated, {
   withSpring,
   Easing,
 } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
+
+const NavigationBar = () => {
+  const navigation = useNavigation();
+
+  const navigateToRoute = (routeName) => {
+    navigation.navigate(routeName);
+  };
+
+  return (
+    <View style={styles.navigationBar}>
+      
+      
+     
+      <TouchableOpacity onPress={() => navigateToRoute('Integrantes')}>
+        <Text style={styles.navButton}>Integrantes</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigateToRoute('Cadastro')}>
+        <Text style={styles.navButton}>Cadastro Usuário</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const Home = () => {
   const scaleValue = useSharedValue(1);
@@ -55,6 +78,8 @@ const Home = () => {
         ]}
         resizeMode="contain"
       />
+
+      <NavigationBar />
     </View>
   );
 };
@@ -68,7 +93,7 @@ const styles = StyleSheet.create({
   },
   checkerboard: {
     width: '100%',
-    height: '100%',
+    height: '90%',
     flexDirection: 'column',
   },
   row: {
@@ -91,6 +116,24 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     position: 'absolute',
   },
+  navigationBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+    backgroundColor: 'white',
+  },
+  navButton: {
+    backgroundColor: 'gold',
+    paddingVertical: 10,
+    paddingHorizontal: 8, 
+    marginHorizontal: 5, 
+    borderRadius: 5,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+  },
+  
 });
 
 export default Home;

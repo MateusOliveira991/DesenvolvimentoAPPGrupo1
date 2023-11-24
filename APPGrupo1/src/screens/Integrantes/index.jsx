@@ -98,7 +98,7 @@ const IntegrantesPage = () => {
   const integrantes = [
     {
       nome: 'CARLOS ALBERTO MOREIRA DA PAZ',
-      descricao: 'Tio CACAIO, entendeu manuu, POOO.',
+      descricao: 'Tio CACAIO, entendeu manuu, PORR.',
       github: 'https://github.com/CarlosAlbertoMPZ',
     },
     {
@@ -113,12 +113,12 @@ const IntegrantesPage = () => {
     },
     {
       nome: 'RODRIGO BERREDO LEAL FERREIRA AMADO',
-      descricao: 'Descrição do Integrante 4.',
+      descricao: 'Segura a marimba aí mon amour!',
       github: 'https://github.com/rblfa',
     },
     {
       nome: 'THIAGO FREDERICO BELLATO',
-      descricao: 'Descrição do Integrante 5.',
+      descricao: '... 🤐',
       github: 'https://github.com/thiagobellato',
     },
   ];

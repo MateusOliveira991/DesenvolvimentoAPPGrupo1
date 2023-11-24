@@ -1,59 +1,124 @@
 import { StyleSheet } from 'react-native';
 const style = StyleSheet.create({
 
-  modal: {
-    flex: 1,
-    backgroundColor: "#49be25",
+  modalContainer: {
+    position: 'absolute',
+    width: '90%',
+    top: '50%',
+    left: '5%',
+    backgroundColor: "#fff",
     padding: 20,
-    marginTop: 150,
+    height: 150,
     borderRadius: 20,
-    borderRadius: 95,
+    transform: [{ translateY: '-50%' }],
+
+    // sombras
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Cor do fundo preto com opacidade de 0.5
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  carregando: {
+    marginTop: 30,
   },
 
   textoModal: {
-    color: "#E4e4e5",
+    color: "#000",
     textAlign: 'center',
-    fontSize: 15,
+    fontWeight: '600',
+    fontSize: 16,
     marginBottom: 10,
   },
 
   buttonContainer: {
-    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
     marginTop: 20,
-    alignItems: "center",
-    justifyContent: 'center',
-    gap: 15
-
   },
 
-  botaoModal: {
-    backgroundColor: "#92cbdf",
-    width: '50%', // Adjusted the width to 65%
+  botaoModalConfirmar: {
+    backgroundColor: "#1c6beb",
+    width: '50%',
     padding: 12,
-    borderRadius: 200,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
 
-  botaoModalTexto: {
-    color: "#041014",
-    fontSize: 16,
-    fontWeight: 'bold',
+  botaoModalCancelar: {
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderColor: '#d40808',
+    width: '50%',
+    padding: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  botaoModalTextoConfirmar: {
+    color: "#FFF",
+    fontSize: 14,
     textAlign: 'center',
   },
 
-  modalContent:{
-    alignItems: "center",
-    justifyContent: 'center'
+  botaoModalTextoCancelar: {
+    color: "#d40808",
+    fontSize: 14,
+    textAlign: 'center',
   },
 
 
 
 
 
-//CADASTRO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   container: {
     flex: 1,
     alignItems: 'center',

@@ -19,21 +19,21 @@ const CadastroProduto = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
+
+
   const confirmar = async () => {
     try {
       setIsLoading(true);
       handleConfirm();
-      setIsVisible(false);
-
       await axios.post('https://655a8d516981238d054d8fe9.mockapi.io/g1/produtos', formData);
-
+      setIsLoading(false);
+      setIsVisible(false);
       Alert.alert('Cadastro bem-sucedido!');
       navigation.navigate('Produtos');
     } catch (error) {
       console.error('Erro ao cadastrar produto:', error);
       Alert.alert('Erro ao cadastrar produto. Tente novamente mais tarde.');
     } finally {
-      setIsLoading(false);
       setFormData(initialFormData);
     }
   };
@@ -73,40 +73,47 @@ const CadastroProduto = () => {
         <Button title="Cadastrar" onPress={() => setIsVisible(true)} />
       </View>
 
-      <Modal
+      <Modal style={styles.teste}
         animationType="slide"
         transparent={true}
         visible={isVisible}
         onRequestClose={() => setIsVisible(false)}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            {isLoading ? (
-              <ActivityIndicator />
-            ) : (
-
-              <View style={styles.modal}>
-                <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
-                <View style={styles.buttonContainer}>
-
-                  <TouchableOpacity
-                    style={styles.botaoModal}
-                    onPress={confirmar}>
-                    <Text style={styles.botaoModalTexto}>Confirmar</Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    style={styles.botaoModal}
-                    onPress={cancelar}>
-                    <Text style={styles.botaoModalTexto}>Cancelar</Text>
-                  </TouchableOpacity>
+        <View style={styles.overlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              {isLoading ? (
+                <View style={styles.modal}>
+                  <ActivityIndicator />
+                  <View style={styles.carregando}>
+                    <Text>Carregando...</Text>
+                  </View>
                 </View>
-              </View>
-            )}
+              ) : (
+
+                <View style={styles.modal}>
+                  <Text style={styles.textoModal}>Deseja confirmar a operação?</Text>
+                  <View style={styles.buttonContainer}>
+
+                    <TouchableOpacity
+                      style={styles.botaoModalConfirmar}
+                      onPress={confirmar}>
+                      <Text style={styles.botaoModalTextoConfirmar}>Confirmar</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.botaoModalCancelar}
+                      onPress={cancelar}>
+                      <Text style={styles.botaoModalTextoCancelar}>Cancelar</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
+            </View>
           </View>
         </View>
-      </Modal>
-    </View>
+      </Modal >
+    </View >
   );
 };
 
